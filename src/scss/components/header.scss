@@ -1,0 +1,30 @@
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+header {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .mini_cart {
+    display: flex;
+    align-items: center;
+    img {
+      width: 15px;
+      height: 15px;
+    }
+    p {
+      margin-top: -6px;
+      font-size: 12px;
+      font-weight: 800;
+      color: red;
+    }
+  }
+  h1{
+    font-size: 20px;
+    font-weight: 800;
+    color: black;
+    text-align: center;
+  }
+}
