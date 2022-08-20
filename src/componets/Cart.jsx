@@ -1,11 +1,18 @@
 import "./style.css";
-import { createSignal, For } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  createRenderEffect,
+  createSignal,
+  For,
+} from "solid-js";
 import Vector from "../assets/img/Vector.svg";
 import corzina from "../assets/img/corzina.png";
 import image2 from "../assets/img/image 2.png";
 import image3 from "../assets/img/image 3.png";
 import image4 from "../assets/img/image 4.png";
 import close from "../assets/img/close.svg";
+import axios from "axios";
 
 const Cart = () => {
   const [act, setAct] = createSignal(false);
@@ -14,6 +21,27 @@ const Cart = () => {
   const [imageBig, setImageBig] = createSignal(0);
   const [active, setActive] = createSignal(0);
   const [count, setCaount] = createSignal(1);
+  const [response, setResponse] = createSignal({});
+
+  const fetchImageBigMemo = createMemo(async () => {
+    const res = await axios.get(
+      `https://jsonplaceholder.typicode.com/todos/${imageBig() + 1}`
+    );
+    // При первом рендере а также при изменени  индекса imageBig ,будет происходить гет запрос
+    setResponse(res.data);
+  });
+  const nextImg = () => {
+    if (imageBig() < 2) {
+      setImageBig(active() + 1);
+      setActive(active() + 1);
+    }
+  };
+  const prevImg = () => {
+    if (active() > 0) {
+      setImageBig(active() - 1);
+      setActive(active() - 1);
+    }
+  };
 
   return (
     <div class="container mx-auto py-5 px-4">
@@ -74,6 +102,17 @@ const Cart = () => {
               )}
             </For>
           </div>
+          <br />
+          <p class='text-red-800'>Пользуемся get запросом и createMemo:</p>
+          <p>
+            Id запроса: <span class='text-cyan-800'>{response().id}</span>
+          </p>
+          <p>Title запроса: <span class='text-cyan-800'>{response().title}</span></p>
+          <div class='my-5'>
+          <button class='text-cyan-800 border border-current rounded-lg w-36 h-12' onClick={prevImg}>преведущая</button>
+          <button class='text-cyan-800 border border-current rounded-lg mx-3 w-36 h-12' onClick={nextImg}>следующая</button>
+          </div>
+          
         </div>
         <div class="w-6/12">
           <h2 class="border-8 mx-auto w-3/6 my-10 text-rose-600 text-2xl flex justify-center  items-center h-20   border-cyan-600">
@@ -82,27 +121,18 @@ const Cart = () => {
           <div class="my-10  flex justify-center items-center">
             <p>Цвет:</p>
 
-<For each={circle}>
-  {(el,index)=>(
-    <div
-    key={index()}
-    class={
-      "w-6  mx-1  rounded-3xl cursor-pointer h-6 " + `${el}`}
-      onClick={() => {
-        setImageBig(index());
-        setActive(index());}}
-    >
-
-    </div>
-  )}
-</For>
-
-
-
-
-
-
- 
+            <For each={circle}>
+              {(el, index) => (
+                <div
+                  key={index()}
+                  class={"w-6  mx-1  rounded-3xl cursor-pointer h-6 " + `${el}`}
+                  onClick={() => {
+                    setImageBig(index());
+                    setActive(index());
+                  }}
+                ></div>
+              )}
+            </For>
           </div>
           <div class=" flex items-center justify-evenly">
             <div class="flex">
