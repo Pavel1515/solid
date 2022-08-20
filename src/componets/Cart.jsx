@@ -1,11 +1,5 @@
 import "./style.css";
-import {
-  createEffect,
-  createMemo,
-  createRenderEffect,
-  createSignal,
-  For,
-} from "solid-js";
+import { createMemo, createSignal, For } from "solid-js";
 import Vector from "../assets/img/Vector.svg";
 import corzina from "../assets/img/corzina.png";
 import image2 from "../assets/img/image 2.png";
@@ -44,7 +38,7 @@ const Cart = () => {
   };
 
   return (
-    <div class="container mx-auto py-5 px-4">
+    <div class=" xl:max-w-screen-xl   min-h-full overflow-y-hidden box-border overflow-x-hidden w-4/5 mx-auto">
       <header class="flex justify-between items-center border-b border-black">
         <img src={Vector} alt="" />
         <h1>Nike Air Force Travis Scott</h1>
@@ -58,31 +52,33 @@ const Cart = () => {
           onClick={() => {
             setAct(false);
           }}
-          class="z-10 absolute bg-white right-1 top-15"
+          class="absolute top-0 right-0 cursor-pointer z-10"
         >
           <img class="z-10 w-20  h-20 cursor-pointer" src={close} alt="" />
         </div>
       )}
-      <div class="flex">
-        <div class="w-6/12">
+      <div class="lg:flex ">
+        <div class=" w-full lg:w-6/12 h-full">
           <div
             class={
               act()
-                ? "flex items-center justify-center w-full absolute h-3/5 bg-slate-300"
-                : ""
+                ? "flex items-center inset-0 justify-center w-full absolute h-full bg-slate-300"
+                : " mx-auto h-2/4 w-3/4 lg:h-3/4 "
             }
           >
             <img
               onClick={() => {
                 setAct(true);
               }}
-              class={act() ? "w-72 h-72" : "mx-10 w-120 h-120"}
+              class={
+                act() ? "w-2/4 h-2/4" : "mx-auto h-2/4 w-3/4 lg:h-3/4 w-3/4"
+              }
               src={image[imageBig()]}
               alt=""
             />
           </div>
 
-          <div class="flex mx-16 ">
+          <div class="flex justify-center lg:mx-16 ">
             <For each={image}>
               {(el, index) => (
                 <img
@@ -103,18 +99,32 @@ const Cart = () => {
             </For>
           </div>
           <br />
-          <p class='text-red-800'>Пользуемся get запросом и createMemo:</p>
-          <p>
-            Id запроса: <span class='text-cyan-800'>{response().id}</span>
-          </p>
-          <p>Title запроса: <span class='text-cyan-800'>{response().title}</span></p>
-          <div class='my-5'>
-          <button class='text-cyan-800 border border-current rounded-lg w-36 h-12' onClick={prevImg}>преведущая</button>
-          <button class='text-cyan-800 border border-current rounded-lg mx-3 w-36 h-12' onClick={nextImg}>следующая</button>
+          <div class="mx-auto text-center">
+            <p class="text-red-800">Пользуемся get запросом и createMemo:</p>
+            <p>
+              Id запроса: <span class="text-cyan-800">{response().id}</span>
+            </p>
+            <p>
+              Title запроса:{" "}
+              <span class="text-cyan-800">{response().title}</span>
+            </p>
           </div>
-          
+          <div class="flex items-center justify-center sm:my-5">
+            <button
+              class="text-cyan-800 border border-current rounded-lg w-36 h-12 hover:bg-amber-600 transition-all"
+              onClick={prevImg}
+            >
+              преведущая
+            </button>
+            <button
+              class="text-cyan-800 border border-current rounded-lg mx-3 w-36 h-12 hover:bg-amber-600 transition-all"
+              onClick={nextImg}
+            >
+              следующая
+            </button>
+          </div>
         </div>
-        <div class="w-6/12">
+        <div class=" lg:w-6/12">
           <h2 class="border-8 mx-auto w-3/6 my-10 text-rose-600 text-2xl flex justify-center  items-center h-20   border-cyan-600">
             12000 <span class="mx-2 text-xl text-emerald-600  "> ₽</span>
           </h2>
@@ -134,8 +144,9 @@ const Cart = () => {
               )}
             </For>
           </div>
-          <div class=" flex items-center justify-evenly">
-            <div class="flex">
+
+          <div class="md:flex items-center justify-evenly">
+            <div class="flex justify-center">
               <div
                 onClick={() => {
                   if (count() > 1) setCaount(count() - 1);
@@ -156,14 +167,15 @@ const Cart = () => {
                 <span>+</span>
               </div>
             </div>
-            <p class="w-56 py-1  h-9 text-center   border  border-black rounded-2xl bg-amber-600 cursor-pointer">
+            <p class="mx-auto m-4 sm:pt-1 w-40 text-center h-9 border  border-black rounded-2xl bg-amber-600 cursor-pointer ">
               Купить в 1 клик
             </p>
-            <div class="flex w-36 h-9  items-center  border  border-black rounded-2xl bg-amber-600 cursor-pointer ">
+            <div class="mx-auto md:mx-0  flex w-36 h-9 items-center items-centerborder border border-black rounded-2xl bg-amber-600 cursor-pointer   ">
               <img src={corzina} class="mx-3 w-4 h-4" alt="" />
               <p class="mx-3">В корзину</p>
             </div>
           </div>
+
           <div class="my-6 h-9 flex justify-evenly">
             <div class="cursor-pointer hover:border-b  border-black">
               Описание
