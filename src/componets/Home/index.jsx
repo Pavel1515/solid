@@ -5,8 +5,8 @@ const Home = () => {
   return (
     <div class="bg-gray-400 min-h-screen w-full flex items-center justify-center">
       <div>
-        <div class="text-rose-900">Магазин кросовкок :</div>
-        <Link href={"/cart"} class="text-rose-900 font-black">
+        <div class="mb-3 text-center text-rose-900">Магазин кросовкок :</div>
+        <Link href={"/cart"} class="border text-center border-black h-10 p-2  text-rose-900 font-black hover:bg-orange-500 rounded transition-all">
           {" "}
           Карточка товара
         </Link>
