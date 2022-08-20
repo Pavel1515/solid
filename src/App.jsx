@@ -1,5 +1,5 @@
 import Cart from "./componets/Cart";
-import './scss/Cart.scss'
+
 
 
 
