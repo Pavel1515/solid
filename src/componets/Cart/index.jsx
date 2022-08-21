@@ -1,13 +1,12 @@
 import "./style.css";
 import { createMemo, createSignal, For } from "solid-js";
-import Vector from "../../assets/img/Vector.svg";
 import corzina from "../../assets/img/corzina.png";
 import image2 from "../../assets/img/image 2.png";
 import image3 from "../../assets/img/image 3.png";
 import image4 from "../../assets/img/image 4.png";
 import close from "../../assets/img/close.svg";
 import axios from "axios";
-import { Link } from "@gh0st-work/solid-js-router";
+import Header from "../Header";
 
 const Cart = () => {
   const [act, setAct] = createSignal(false);
@@ -40,16 +39,7 @@ const Cart = () => {
 
   return (
     <div class=" xl:max-w-screen-xl   min-h-full overflow-y-hidden box-border overflow-x-hidden w-4/5 mx-auto">
-      <header class="flex justify-between items-center border-b border-black">
-        <Link href={"/"}>
-          <img src={Vector} alt="" />
-        </Link>
-        <h1>Nike Air Force Travis Scott</h1>
-        <div class="flex justify-between items-center ">
-          <img src={corzina} alt="" />
-          <p class="text-amber-500  my-5">{count()}</p>
-        </div>
-      </header>
+      <Header count={count()} />
       {act() && (
         <div
           onClick={() => {
